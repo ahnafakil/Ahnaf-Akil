@@ -4,8 +4,7 @@
 # ============================================================
 
 backend:
-  name: github
-  repo: AhnafAkil/ahnafakil.com           # ← change to your actual repo path
+  name: git-gateway
   branch: main
   # Once you set up the OAuth bridge, you may need to add:
   # base_url: https://your-oauth-bridge.netlify.app
