@@ -1,0 +1,68 @@
+# ============================================================
+#  Decap CMS Config — ahnafakil.com
+#  Auth: GitHub OAuth (via Netlify Identity bridge or own OAuth proxy)
+# ============================================================
+
+backend:
+  name: github
+  repo: AhnafAkil/ahnafakil.com           # ← change to your actual repo path
+  branch: main
+  # Once you set up the OAuth bridge, you may need to add:
+  # base_url: https://your-oauth-bridge.netlify.app
+  # auth_endpoint: api/v1/auth
+
+# Where uploaded images live in the repo
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+# Show a clear publish workflow with drafts
+publish_mode: editorial_workflow
+
+site_url: https://ahnafakil.com
+display_url: https://ahnafakil.com
+logo_url: https://ahnafakil.com/assets/img/og.png
+
+collections:
+
+  # ───────────────────────────────────────────────────────────
+  # Blog Posts
+  # ───────────────────────────────────────────────────────────
+  - name: "blog"
+    label: "Blog Posts"
+    label_singular: "Post"
+    folder: "posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}}  —  {{date | date('YYYY-MM-DD')}}"
+    sortable_fields: ['date', 'title']
+    fields:
+      - { label: "Title",   name: "title",   widget: "string" }
+      - { label: "Date",    name: "date",    widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ" }
+      - { label: "Excerpt", name: "excerpt", widget: "text",
+          hint: "1-2 sentence summary shown on the blog index card." }
+      - { label: "Cover Image (optional)", name: "cover", widget: "image", required: false }
+      - { label: "Body",    name: "body",    widget: "markdown" }
+
+  # ───────────────────────────────────────────────────────────
+  # Posts manifest (so blog.js knows what to list)
+  # Decap will keep this file in sync with the posts folder
+  # via a separate file collection
+  # ───────────────────────────────────────────────────────────
+  - name: "manifest"
+    label: "Posts Manifest"
+    files:
+      - name: "posts_manifest"
+        label: "Posts Manifest (auto-managed — do not edit unless needed)"
+        file: "posts/posts.json"
+        fields:
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            fields:
+              - { label: "Slug",    name: "slug",    widget: "string" }
+              - { label: "Title",   name: "title",   widget: "string" }
+              - { label: "Date",    name: "date",    widget: "datetime" }
+              - { label: "Excerpt", name: "excerpt", widget: "text" }
+              - { label: "File",    name: "file",    widget: "string" }
