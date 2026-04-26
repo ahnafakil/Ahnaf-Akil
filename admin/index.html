@@ -7,8 +7,19 @@
   <meta name="robots" content="noindex" />
 </head>
 <body>
-  <!-- Decap CMS — loaded from CDN -->
+<body>
+  <!-- Netlify Identity widget — handles login UI -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <!-- Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js"></script>
+
+  <script>
+    if (window.CMS) {
+      CMS.registerPreviewStyle('/assets/css/main.css');
+    }
+  </script>
+</body>
 
   <script>
     // Optional: register a custom preview style so posts feel close to live
