@@ -6,6 +6,8 @@
 backend:
   name: git-gateway
   branch: main
+  identity_url: https://YOUR-NETLIFY-URL.netlify.app/.netlify/identity
+  gateway_url: https://YOUR-NETLIFY-URL.netlify.app/.netlify/git
   # Once you set up the OAuth bridge, you may need to add:
   # base_url: https://your-oauth-bridge.netlify.app
   # auth_endpoint: api/v1/auth
