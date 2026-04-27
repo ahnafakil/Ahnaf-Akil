@@ -1527,3 +1527,212 @@ section {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ============================================================
+   ▒▒▒  MOBILE FIXES — appended Apr 2026  ▒▒▒
+   Targeted overrides for narrow viewports. Cascade-only;
+   none of the rules above were modified.
+   ============================================================ */
+
+/* ─── 1. Solid mobile nav dropdown ───────────────────────────
+   Bug: open menu let hero content bleed through (Image 1).
+   Fix: opaque deepspc background + stronger shadow.        */
+@media (max-width: 720px) {
+  .nav-links {
+    background: rgba(24, 31, 34, 0.94);
+    border-color: var(--glass-border-strong);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    padding: var(--s-2);
+    gap: 2px;
+  }
+
+  .nav-links a {
+    padding: 14px var(--s-3);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  /* Subtle separators between menu items */
+  .nav-links li + li a {
+    border-top: 1px solid var(--glass-border);
+    border-radius: 0;
+  }
+
+  .nav-links li:first-child a { border-radius: 12px 12px 0 0; }
+  .nav-links li:last-child  a { border-radius: 0 0 12px 12px; }
+
+  .nav-links li:only-child a { border-radius: 12px; }
+}
+
+/* ─── 2. About photo: kill sticky on mobile ──────────────────
+   Bug: position:sticky caused the photo to overlap the
+   article text on single-column viewports (Image 2).
+   Fix: relative positioning under the breakpoint and a
+   reasonable max-width so the headshot doesn't dominate.   */
+@media (max-width: 959px) {
+  .about-photo {
+    position: relative;
+    top: auto;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-photo {
+    max-width: 280px;
+  }
+
+  .about-photo .frame {
+    aspect-ratio: 1 / 1.15;
+  }
+}
+
+/* ─── 3. Hero tagline: stack vertically on small screens ────
+   Bug: "IT Support · Today  →  Software Engineering · Ahead"
+   wrapped awkwardly and the connecting arrow line broke
+   layout (Image 4).
+   Fix: drop the arrow line, stack the two halves.           */
+@media (max-width: 600px) {
+  .hero-tagline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+  }
+
+  .hero-tagline .arrow-line {
+    display: none;
+  }
+}
+
+/* ─── 4. Hero proportions on phones ─────────────────────────
+   The 100vh hero with --s-9 (128px) top-padding pushed the
+   "Now" card too far down on small screens. Tighten it.     */
+@media (max-width: 720px) {
+  .hero {
+    min-height: auto;
+    padding-top: 110px;
+    padding-bottom: var(--s-7);
+  }
+
+  .hero-card {
+    padding: var(--s-4);
+  }
+
+  .now-row {
+    grid-template-columns: 80px 1fr;
+    padding: var(--s-3);
+  }
+
+  .now-key   { font-size: 0.65rem; letter-spacing: 0.1em; }
+  .now-val   { font-size: 1rem; }
+  .now-meta  { font-size: 0.65rem; }
+
+  /* Don't let the accent dot crowd the text on mobile */
+  .now-row--accent::before {
+    right: 10px;
+    width: 5px;
+    height: 5px;
+  }
+}
+
+/* ─── 5. Path section breathing room ────────────────────────
+   On stacked mobile, the "YOU ARE HERE" pill sits at -10px
+   above the current card. Bump the gap so it doesn't kiss
+   the previous card's bottom edge (Image 3).               */
+@media (max-width: 959px) {
+  .path {
+    gap: var(--s-5);
+  }
+
+  .path-col {
+    padding: var(--s-4);
+  }
+
+  .path-col h3 {
+    font-size: 1.4rem;
+  }
+
+  .path-col--current::after {
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    padding: 3px 9px;
+  }
+}
+
+/* ─── 6. General mobile spacing & typography ────────────────
+   Section padding 96px (--s-8) is too generous on phones;
+   --s-7 (64px) flows better. Slightly tighter h2 too.      */
+@media (max-width: 720px) {
+  section {
+    padding: var(--s-7) 0;
+  }
+
+  .section-head {
+    margin-bottom: var(--s-5);
+  }
+
+  .hero-headline {
+    margin: var(--s-3) 0;
+  }
+
+  .hero-bridge {
+    font-size: 1.0625rem;
+    margin-bottom: var(--s-4);
+  }
+
+  .hero-cta {
+    margin-top: var(--s-4);
+    width: 100%;
+  }
+
+  .hero-cta .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .project-card,
+  .contact-form {
+    padding: var(--s-4);
+  }
+
+  .project-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .post-article {
+    padding: var(--s-4);
+    font-size: 1rem;
+  }
+}
+
+/* ─── 7. Container padding on the smallest phones ───────────
+   Default --s-4 (24px) horizontal padding eats too much of
+   a 380px viewport. Drop to --s-3 (16px) under 480px.      */
+@media (max-width: 480px) {
+  .container,
+  .container-narrow {
+    padding: 0 var(--s-3);
+  }
+
+  .nav {
+    width: calc(100% - var(--s-3));
+    padding: var(--s-2) var(--s-3);
+    top: var(--s-2);
+  }
+
+  .nav-brand {
+    font-size: 1.1rem;
+  }
+
+  /* Headline slightly smaller so "Akil" doesn't break out */
+  .hero-headline {
+    font-size: clamp(2.5rem, 11vw, 4rem);
+  }
+}
