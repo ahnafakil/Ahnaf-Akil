@@ -36,7 +36,7 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="projects.html">Projects</a></li>
-      <li><a href="blog.html">Writing</a></li>
+      <li><a href="https://blogs.ahnafakil.com">Writing</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
@@ -71,7 +71,7 @@
             <a href="projects.html" class="btn btn-primary">
               View Projects <span class="arrow" aria-hidden="true">→</span>
             </a>
-            <a href="blog.html" class="btn">
+            <a href="https://blogs.ahnafakil.com" class="btn">
               Read the Blog
             </a>
           </div>
@@ -268,6 +268,18 @@
       </div>
     </div>
   </footer>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>
