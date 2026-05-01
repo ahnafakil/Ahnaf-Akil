@@ -1,0 +1,48 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+publish_mode: editorial_workflow
+
+site_url: https://ahnafakil.com
+display_url: https://ahnafakil.com
+logo_url: https://ahnafakil.com/assets/img/og.png
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    label_singular: "Post"
+    folder: "posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}}  —  {{date | date('YYYY-MM-DD')}}"
+    sortable_fields: ['date', 'title']
+    fields:
+      - { label: "Title",   name: "title",   widget: "string" }
+      - { label: "Date",    name: "date",    widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ" }
+      - { label: "Excerpt", name: "excerpt", widget: "text",
+          hint: "1-2 sentence summary shown on the blog index card." }
+      - { label: "Cover Image", name: "cover", widget: "image", required: false }
+      - { label: "Body",    name: "body",    widget: "markdown" }
+
+  - name: "manifest"
+    label: "Posts Manifest"
+    files:
+      - name: "posts_manifest"
+        label: "Posts Manifest (auto-managed)"
+        file: "posts/posts.json"
+        fields:
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            fields:
+              - { label: "Slug",    name: "slug",    widget: "string" }
+              - { label: "Title",   name: "title",   widget: "string" }
+              - { label: "Date",    name: "date",    widget: "datetime" }
+              - { label: "Excerpt", name: "excerpt", widget: "text" }
+              - { label: "File",    name: "file",    widget: "string" }
